@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package>
+  <infos>
+    <name>XWiki.AwesomeSheet</name>
+    <description/>
+    <licence/>
+    <author/>
+    <version/>
+    <backupPack>false</backupPack>
+    <preserveVersion>false</preserveVersion>
+  </infos>
+  <files>
+    <file defaultAction="0" language="">XWiki.AwesomeSheet</file>
+  </files>
+</package>
