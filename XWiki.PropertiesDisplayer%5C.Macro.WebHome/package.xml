@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <package>
   <infos>
-    <name>XWiki.AwesomeSheet</name>
+    <name>XWiki.PropertiesDisplayer\.Macro.WebHome</name>
     <description/>
     <licence/>
     <author/>
@@ -10,6 +10,6 @@
     <preserveVersion>false</preserveVersion>
   </infos>
   <files>
-    <file defaultAction="0" language="">XWiki.AwesomeSheet</file>
+    <file defaultAction="0" language="">XWiki.PropertiesDisplayer\.Macro.WebHome</file>
   </files>
 </package>
