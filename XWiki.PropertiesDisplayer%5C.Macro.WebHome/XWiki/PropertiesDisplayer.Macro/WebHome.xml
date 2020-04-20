@@ -10,9 +10,9 @@
   <parent>XWiki.WebHome</parent>
   <author>XWiki.superadmin</author>
   <contentAuthor>XWiki.superadmin</contentAuthor>
-  <date>1587117028000</date>
+  <date>1587372593000</date>
   <contentUpdateDate>1587101924000</contentUpdateDate>
-  <version>14.60</version>
+  <version>15.92</version>
   <title>PropertiesDisplayer.Macro</title>
   <comment/>
   <minorEdit>true</minorEdit>
@@ -218,7 +218,6 @@
 #set ($displayEmptyValues = $wikimacro.parameters.displayEmptyValues)&#xd;
 &#xd;
 {{html wiki="true"}}&#xd;
-&#xd;
   ## By default, display empty properties.&#xd;
   #if ($objecttool.isNull( $displayEmptyValues))&#xd;
     #set ($displayEmptyValues = true)&#xd;
@@ -228,10 +227,12 @@
   #if ($objecttool.isNotNull($object))&#xd;
     #set ($discard = $doc.use($object))&#xd;
     #if ($objecttool.isNotNull($propertiesList))&#xd;
-      ## TODO: each property in a separated row.&#xd;
       #foreach($prop in $propertiesList)&#xd;
-        $prop&#xd;
-        $doc.display($prop)&#xd;
+      (% class=row %)&#xd;
+      (((&#xd;
+      $doc.displayPrettyName($prop)&#xd;
+      $doc.display($prop)&#xd;
+      )))&#xd;
       #end&#xd;
     #end&#xd;
   #end&#xd;
@@ -244,7 +245,7 @@
       <contentDescription></contentDescription>
     </property>
     <property>
-      <contentJavaType></contentJavaType>
+      <contentJavaType>com.xpn.xwiki.api.Object</contentJavaType>
     </property>
     <property>
       <contentType></contentType>
@@ -421,7 +422,7 @@
       <name>propertiesList</name>
     </property>
     <property>
-      <type></type>
+      <type>java.util.List&lt;java.lang.String></type>
     </property>
   </object>
   <object>
@@ -499,7 +500,7 @@
       <name>displayEmptyValues</name>
     </property>
     <property>
-      <type></type>
+      <type>java.lang.Boolean</type>
     </property>
   </object>
 </xwikidoc>
