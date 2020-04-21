@@ -216,28 +216,36 @@
 #set ($object = $wikimacro.parameters.object)&#xd;
 #set ($propertiesList = $wikimacro.parameters.propertiesList)&#xd;
 #set ($displayEmptyValues = $wikimacro.parameters.displayEmptyValues)&#xd;
+#set ($blockSize = $wikimacro.parameters.blockSize)&#xd;
 &#xd;
-{{html wiki="true"}}&#xd;
-  ## By default, display empty properties.&#xd;
-  #if ($objecttool.isNull( $displayEmptyValues))&#xd;
-    #set ($displayEmptyValues = true)&#xd;
+  #if ($objecttool.isNull($displayEmptyValues))&#xd;
+      #set ($displayEmptyValues = true)&#xd;
   #end&#xd;
-&#xd;
   ## The list of properties reffers to the current object.&#xd;
   #if ($objecttool.isNotNull($object))&#xd;
     #set ($discard = $doc.use($object))&#xd;
     #if ($objecttool.isNotNull($propertiesList))&#xd;
-      #foreach($prop in $propertiesList)&#xd;
-      (% class=row %)&#xd;
+&#xd;
+      {{html wiki="true"}}&#xd;
+&#xd;
+      (% class="col-sm-$blockSize" %)&#xd;
       (((&#xd;
-      $doc.displayPrettyName($prop)&#xd;
-      $doc.display($prop)&#xd;
-      )))&#xd;
-      #end&#xd;
+        #foreach($prop in $propertiesList)&#xd;
+          ## By default, display empty properties.&#xd;
+          #if ('true' == $displayEmptyValues || ('false' == $displayEmptyValues &amp;&amp; '' != $doc.display($prop)))&#xd;
+            (% class=row %)&#xd;
+            (((&#xd;
+            (% class="col-sm-6" %)((( $doc.displayPrettyName($prop) )))&#xd;
+            (% class="col-sm-6" %)((( $doc.display($prop) )))&#xd;
+            )))&#xd;
+          #end&#xd;
+        #end&#xd;
+     )))&#xd;
+&#xd;
+    {{/html}}&#xd;
+&#xd;
     #end&#xd;
   #end&#xd;
-&#xd;
-{{/html}}&#xd;
 &#xd;
 {{/velocity}}</code>
     </property>
@@ -488,7 +496,7 @@
       </type>
     </class>
     <property>
-      <defaultValue>false</defaultValue>
+      <defaultValue>true</defaultValue>
     </property>
     <property>
       <description>Display or not a null property.</description>
@@ -501,6 +509,84 @@
     </property>
     <property>
       <type>java.lang.Boolean</type>
+    </property>
+  </object>
+  <object>
+    <name>XWiki.PropertiesDisplayer\.Macro.WebHome</name>
+    <number>3</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>7b7119dc-1340-4794-9706-c04b299674be</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <type>
+        <disabled>0</disabled>
+        <name>type</name>
+        <number>5</number>
+        <prettyName>Parameter type</prettyName>
+        <size>60</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </type>
+    </class>
+    <property>
+      <defaultValue>6</defaultValue>
+    </property>
+    <property>
+      <description>The number of columns the block will be displayed on</description>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>blockSize</name>
+    </property>
+    <property>
+      <type>java.lang.Integer </type>
     </property>
   </object>
 </xwikidoc>
