@@ -32,24 +32,26 @@
   <version>1.0-SNAPSHOT</version>
   <name>Properties displayer</name>
   <packaging>xar</packaging>
-  <description>Your extension's description</description>
+  <description>Displays a list of properties for an object</description>
+  <!--
   <scm>
     <connection>scm:git:git://github.com/xwiki-contrib/(your extension id).git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/(your extension id).git</developerConnection>
     <url>https://github.com/xwiki-contrib/(your extension id)</url>
   </scm>
+  -->
   <developers>
     <developer>
-      <id>scm id of developer 1</id>
+      <id>GabrielRaileanu</id>
       <name>Gabriel Răileanu</name>
     </developer>
   </developers>
   <properties>
     <!-- Don't check for API backward-compatibility here since there's no Java code. -->
-    If you're using a xwiki-commons parent POM that is >= 8.1M1 then you need to use:
+    <!-- If you're using a xwiki-commons parent POM that is >= 8.1M1 then you need to use: -->
     <xwiki.revapi.skip>true</xwiki.revapi.skip>
-    Otherwise you should use:
-    <xwiki.clirr.skip>true</xwiki.clirr.skip>
+    <!-- Otherwise you should use: -->
+    <!-- <xwiki.clirr.skip>true</xwiki.clirr.skip> -->
 
     <!-- The Extension name. If not defined, the <name> property is used -->
     <xwiki.extension.name>Your extension's name</xwiki.extension.name>
