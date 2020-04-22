@@ -28,18 +28,16 @@
     <version>8.4-11</version>
   </parent>
   <groupId>org.xwiki.contrib</groupId>
-  <artifactId>your-extension-id</artifactId>
+  <artifactId>properties-displayer</artifactId>
   <version>1.0-SNAPSHOT</version>
   <name>Properties displayer</name>
   <packaging>xar</packaging>
   <description>Displays a list of properties for an object</description>
-  <!--
   <scm>
-    <connection>scm:git:git://github.com/xwiki-contrib/(your extension id).git</connection>
-    <developerConnection>scm:git:git@github.com:xwiki-contrib/(your extension id).git</developerConnection>
-    <url>https://github.com/xwiki-contrib/(your extension id)</url>
+    <connection>scm:git:git://github.com/xwiki-contrib/properties-displayer.git</connection>
+    <developerConnection>scm:git:git@github.com:xwiki-contrib/properties-displayer.git</developerConnection>
+    <url>https://github.com/xwiki-contrib/properties-displayer</url>
   </scm>
-  -->
   <developers>
     <developer>
       <id>GabrielRaileanu</id>
@@ -54,7 +52,7 @@
     <!-- <xwiki.clirr.skip>true</xwiki.clirr.skip> -->
 
     <!-- The Extension name. If not defined, the <name> property is used -->
-    <xwiki.extension.name>Your extension's name</xwiki.extension.name>
+    <xwiki.extension.name>Properties displayer</xwiki.extension.name>
 
     <!-- The extension's category -->
     <xwiki.extension.category>application</xwiki.extension.category>
