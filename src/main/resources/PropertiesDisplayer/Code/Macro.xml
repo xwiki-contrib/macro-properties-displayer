@@ -38,7 +38,7 @@
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
-  <hidden>false</hidden>
+  <hidden>true</hidden>
   <content/>
   <object>
     <name>PropertiesDisplayer.Code.Macro</name>
@@ -69,18 +69,16 @@
         <cache>0</cache>
         <disabled>0</disabled>
         <displayType>select</displayType>
-        <freeText>forbidden</freeText>
-        <largeStorage>0</largeStorage>
         <multiSelect>1</multiSelect>
         <name>async_context</name>
-        <number>13</number>
+        <number>12</number>
         <prettyName>Context elements</prettyName>
         <relationalStorage>0</relationalStorage>
         <separator> </separator>
         <separators>|, </separators>
         <size>5</size>
         <unmodifiable>0</unmodifiable>
-        <values>doc.reference=Document|icon.theme=Icon theme|locale=Language|rendering.defaultsyntax=Default syntax|rendering.restricted=Restricted|rendering.targetsyntax=Target syntax|request.base=Request base URL|request.parameters=Request parameters|request.url=Request URL|request.wiki=Request wiki|user=User|wiki=Wiki</values>
+        <values>author=Author|doc.reference=Document|locale=Language|request.base=Request base URL|request.parameters=Request parameters|request.url=Request URL|request.wiki=Request wiki|user=User|wiki=Wiki</values>
         <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
       </async_context>
       <async_enabled>
@@ -110,43 +108,21 @@
         <disabled>0</disabled>
         <editor>PureText</editor>
         <name>contentDescription</name>
-        <number>9</number>
+        <number>8</number>
         <prettyName>Content description (Not applicable for "No content" type)</prettyName>
         <rows>5</rows>
         <size>40</size>
         <unmodifiable>0</unmodifiable>
         <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
       </contentDescription>
-      <contentJavaType>
-        <cache>0</cache>
-        <defaultValue>Unknown</defaultValue>
-        <disabled>0</disabled>
-        <displayType>input</displayType>
-        <freeText>allowed</freeText>
-        <largeStorage>1</largeStorage>
-        <multiSelect>0</multiSelect>
-        <name>contentJavaType</name>
-        <number>8</number>
-        <picker>1</picker>
-        <prettyName>Macro content type</prettyName>
-        <relationalStorage>0</relationalStorage>
-        <separator>|</separator>
-        <separators>|</separators>
-        <size>1</size>
-        <unmodifiable>0</unmodifiable>
-        <values>Unknown|Wiki</values>
-        <classType>com.xpn.xwiki.objects.classes.StaticListClass</classType>
-      </contentJavaType>
       <contentType>
         <cache>0</cache>
         <disabled>0</disabled>
         <displayType>select</displayType>
-        <freeText>forbidden</freeText>
-        <largeStorage>0</largeStorage>
         <multiSelect>0</multiSelect>
         <name>contentType</name>
         <number>7</number>
-        <prettyName>Macro content availability</prettyName>
+        <prettyName>Macro content type</prettyName>
         <relationalStorage>0</relationalStorage>
         <separator>|</separator>
         <separators>|</separators>
@@ -208,8 +184,6 @@
         <cache>0</cache>
         <disabled>0</disabled>
         <displayType>select</displayType>
-        <freeText>forbidden</freeText>
-        <largeStorage>0</largeStorage>
         <multiSelect>0</multiSelect>
         <name>visibility</name>
         <number>6</number>
@@ -234,8 +208,18 @@
     </property>
     <property>
       <code>{{velocity wiki="true"}}
+## wikimacro.parameters is available from XWiki 10.11.9, 11.3.2 and 11.6RC1
+#if ('' == "$!wikimacro.parameters")
+  #set ($wikimacro = {})
+  #set ($wikimacro.parameters = $xcontext.macro.params)
+#end
+
 #set ($object = $wikimacro.parameters.object)
 #set ($propertiesList = $wikimacro.parameters.propertiesList)
+## TODO: ensure that $propertiesList is converted to its value from WikiMacroParameterClass (here, an array of string)
+#if ('' != "$!wikimacro.parameters.propertiesList")
+  #set ($propertiesList = $wikimacro.parameters.propertiesList.split(", "))
+#end
 #set ($displayEmptyValues = $wikimacro.parameters.displayEmptyValues)
 #set ($blockNoColumns = $wikimacro.parameters.blockClasses)
 #set ($propertyNameNoColumns = $wikimacro.parameters.propertyNameClasses)
@@ -245,30 +229,33 @@
 #set ($blockBgColor = $wikimacro.parameters.blockBackgroundColor)
 
 #if ('' != "$!blockBgColor")
-  #if ($objecttool.isNull($blockStyle))
+  #if ('' == "$!blockStyle")
     #set ($blockStyle = '')
   #end
     #set($blockStyle = $blockStyle + " background: $blockBgColor;")
 #end
 
 ## The list of properties reffers to the current object.
-#if ($objecttool.isNotNull($object))
+#if ('' != "$!object")
   #set ($discard = $doc.use($object))
-  #if ($objecttool.isNotNull($propertiesList))
+  #if ('' != "$!propertiesList")
+
     {{html wiki="true"}}
 
-    ## Block size here
+    ## Block size
     (% class="$blockNoColumns" style="$blockStyle" %)
     (((
+    ## Title? col-sm-12?
     (% class=row% style="text-align:center" %) ((($blockTitle)))
     #foreach($prop in $propertiesList)
       ## By default, display empty properties.
       #if ('true' == $displayEmptyValues || ('false' == $displayEmptyValues &amp;&amp; '' != $doc.display($prop)))
-        (% class=row %)
-        (((
+        ##(% class=row %)
+        ##(((
         (% class="$propertyNameNoColumns" %)((( $doc.displayPrettyName($prop) )))
         (% class="$propertyValuesNoColumns" %)((( $doc.display($prop) )))
-        )))
+        ##)))
+        $doc.display("cevaNumar")
       #end
     #end
     )))
@@ -282,9 +269,6 @@
     </property>
     <property>
       <contentDescription/>
-    </property>
-    <property>
-      <contentJavaType>com.xpn.xwiki.api.Object</contentJavaType>
     </property>
     <property>
       <contentType/>
@@ -764,7 +748,7 @@
       <defaultValue>xform col-sm-6</defaultValue>
     </property>
     <property>
-      <description/>
+      <description> </description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -920,7 +904,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description/>
+      <description> </description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -998,7 +982,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description/>
+      <description> </description>
     </property>
     <property>
       <mandatory>0</mandatory>
