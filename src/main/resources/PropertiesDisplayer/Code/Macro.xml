@@ -216,26 +216,23 @@
 
 #set ($object = $wikimacro.parameters.object)
 #set ($propertiesList = $wikimacro.parameters.propertiesList)
-## TODO: ensure that $propertiesList is converted to its value from WikiMacroParameterClass (here, an array of string)
+## Ensure that $propertiesList is converted to an list of strings.
 #if ('' != "$!wikimacro.parameters.propertiesList")
   #set ($propertiesList = $wikimacro.parameters.propertiesList.split(", "))
 #end
 #set ($displayEmptyValues = $wikimacro.parameters.displayEmptyValues)
-#set ($blockNoColumns = $wikimacro.parameters.blockClasses)
+#set ($blockNoColumns = $wikimacro.parameters.blockNoColumns)
 #set ($propertyNameNoColumns = $wikimacro.parameters.propertyNameClasses)
 #set ($propertyValuesNoColumns = $wikimacro.parameters.propertyValuesClasses)
-#set ($blockStyle = $wikimacro.parameters.styles)
+#set ($blockStyle = $wikimacro.parameters.blockStyle)
 #set ($blockTitle = $wikimacro.parameters.blockTitle)
 #set ($blockBgColor = $wikimacro.parameters.blockBackgroundColor)
-
 #if ('' != "$!blockBgColor")
   #if ('' == "$!blockStyle")
     #set ($blockStyle = '')
   #end
     #set($blockStyle = $blockStyle + " background: $blockBgColor;")
 #end
-
-## The list of properties reffers to the current object.
 #if ('' != "$!object")
   #set ($discard = $doc.use($object))
   #if ('' != "$!propertiesList")
@@ -245,17 +242,17 @@
     ## Block size
     (% class="$blockNoColumns" style="$blockStyle" %)
     (((
-    ## Title? col-sm-12?
-    (% class=row% style="text-align:center" %) ((($blockTitle)))
+    #if ('' != "$!blockTitle")
+      ((($blockTitle)))
+    #end
     #foreach($prop in $propertiesList)
       ## By default, display empty properties.
       #if ('true' == $displayEmptyValues || ('false' == $displayEmptyValues &amp;&amp; '' != $doc.display($prop)))
-        ##(% class=row %)
-        ##(((
+        (% class=row %)
+        (((
         (% class="$propertyNameNoColumns" %)((( $doc.displayPrettyName($prop) )))
         (% class="$propertyValuesNoColumns" %)((( $doc.display($prop) )))
-        ##)))
-        $doc.display("cevaNumar")
+        )))
       #end
     #end
     )))
@@ -264,7 +261,6 @@
 
     #end
 #end
-
 {{/velocity}}</code>
     </property>
     <property>
@@ -832,7 +828,7 @@
       <mandatory>0</mandatory>
     </property>
     <property>
-      <name>blockClasses</name>
+      <name>blockStyle</name>
     </property>
     <property>
       <type>java.lang.String</type>
