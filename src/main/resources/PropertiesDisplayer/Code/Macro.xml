@@ -212,17 +212,16 @@
 #if ('' == "$!wikimacro.parameters")
   #set ($wikimacro = {})
   #set ($wikimacro.parameters = $xcontext.macro.params)
-#end
-
-#set ($object = $wikimacro.parameters.object)
-#set ($propertiesList = $wikimacro.parameters.propertiesList)
-## Ensure that $propertiesList is converted to an list of strings.
-#if ('' != "$!wikimacro.parameters.propertiesList")
+  ## Ensure that $propertiesList is converted to a list, since the parameters are strings.
   #set ($propertiesList = $wikimacro.parameters.propertiesList.split(", "))
+#else
+  #set ($propertiesList = $wikimacro.parameters.propertiesList)
 #end
+##
+#set ($object = $wikimacro.parameters.object)
 #set ($displayEmptyValues = $wikimacro.parameters.displayEmptyValues)
 #set ($blockNoColumns = $wikimacro.parameters.blockNoColumns)
-#set ($propertyNameNoColumns = $wikimacro.parameters.propertyNameClasses)
+#set ($propertyNameNoColumns = $wikimacro.parameters.propertyNameNoColumns)
 #set ($propertyValuesNoColumns = $wikimacro.parameters.propertyValuesClasses)
 #set ($blockStyle = $wikimacro.parameters.blockStyle)
 #set ($blockTitle = $wikimacro.parameters.blockTitle)
@@ -273,7 +272,7 @@
       <defaultCategory>Content</defaultCategory>
     </property>
     <property>
-      <description>Displays the properties of an object in a floating box (v1.0)</description>
+      <description>Displays the properties of an object in a floating box (v1.0).</description>
     </property>
     <property>
       <id>propertiesDisplayer</id>
