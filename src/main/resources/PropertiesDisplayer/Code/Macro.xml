@@ -221,7 +221,7 @@
 #set ($object = $wikimacro.parameters.object)
 #set ($displayEmptyValues = $wikimacro.parameters.displayEmptyValues)
 #set ($blockNoColumns = $wikimacro.parameters.blockNoColumns)
-#set ($propertyNameNoColumns = $wikimacro.parameters.propertyNameNoColumns)
+#set ($propertyNameNoColumns = $wikimacro.parameters.propertyNameClasses)
 #set ($propertyValuesNoColumns = $wikimacro.parameters.propertyValuesClasses)
 #set ($blockStyle = $wikimacro.parameters.blockStyle)
 #set ($blockTitle = $wikimacro.parameters.blockTitle)
@@ -593,7 +593,7 @@
       <mandatory>0</mandatory>
     </property>
     <property>
-      <name>propertyNameNoColumns</name>
+      <name>propertyNameClasses</name>
     </property>
     <property>
       <type>java.lang.String</type>
@@ -743,7 +743,7 @@
       <defaultValue>xform col-sm-6</defaultValue>
     </property>
     <property>
-      <description> </description>
+      <description>Bootstrap columns for the block.</description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -821,7 +821,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description>Style classes for the block</description>
+      <description>CSS for the block. Note that the background color and the number of Bootstrap columns are anothers parameters.</description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -899,7 +899,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description> </description>
+      <description/>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -977,7 +977,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description> </description>
+      <description/>
     </property>
     <property>
       <mandatory>0</mandatory>
