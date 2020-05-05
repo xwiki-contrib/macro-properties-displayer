@@ -32,7 +32,7 @@
   <version>1.0-SNAPSHOT</version>
   <name>Properties displayer macro</name>
   <packaging>xar</packaging>
-  <description>Displays a list of properties for an object</description>
+  <description>Display the properties of an object and corresponding values in a floating box</description>
   <scm>
     <connection>scm:git:git://github.com/xwiki-contrib/macro-properties-displayer.git</connection>
     <developerConnection>scm:git:git@github.com:xwiki-contrib/macro-properties-displayer.git</developerConnection>

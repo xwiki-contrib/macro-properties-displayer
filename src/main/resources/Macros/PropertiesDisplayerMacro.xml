@@ -20,9 +20,9 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
 -->
 
-<xwikidoc version="1.4" reference="PropertiesDisplayer.Code.Macro" locale="">
-  <web>PropertiesDisplayer.Code</web>
-  <name>Macro</name>
+<xwikidoc version="1.3" reference="Macros.PropertiesDisplayerMacro" locale="">
+  <web>Macros</web>
+  <name>PropertiesDisplayerMacro</name>
   <language/>
   <defaultLanguage/>
   <translation>0</translation>
@@ -38,10 +38,10 @@
   <hidden>true</hidden>
   <content/>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>0</number>
     <className>XWiki.WikiMacroClass</className>
-    <guid>eb8cfaa4-6de9-4e89-affe-05f910eec3f1</guid>
+    <guid>1a17265f-4461-4ea1-94a2-9040990266fc</guid>
     <class>
       <name>XWiki.WikiMacroClass</name>
       <customClass/>
@@ -57,7 +57,7 @@
         <displayFormType>select</displayFormType>
         <displayType/>
         <name>async_cached</name>
-        <number>12</number>
+        <number>11</number>
         <prettyName>Cached</prettyName>
         <unmodifiable>0</unmodifiable>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
@@ -84,7 +84,7 @@
         <displayFormType>select</displayFormType>
         <displayType/>
         <name>async_enabled</name>
-        <number>11</number>
+        <number>10</number>
         <prettyName>Asynchronous rendering</prettyName>
         <unmodifiable>0</unmodifiable>
         <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
@@ -93,7 +93,7 @@
         <disabled>0</disabled>
         <editor>Text</editor>
         <name>code</name>
-        <number>10</number>
+        <number>9</number>
         <prettyName>Macro code</prettyName>
         <rows>20</rows>
         <size>40</size>
@@ -285,10 +285,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>0</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>7f904c6f-6159-4541-9800-84cfc95a565f</guid>
+    <guid>6dff796a-32b9-409f-a3c3-1a8ad9dfee4e</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -363,10 +363,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>1</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>1fb688f3-5219-4adc-be46-b0922130d985</guid>
+    <guid>4c39ee59-e3c1-4199-bdd1-8e9a5c2d8557</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -441,10 +441,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>2</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>37e8b3c7-379b-4b43-b4c3-d17e3e3df965</guid>
+    <guid>e2595832-077d-4cd9-94f7-825bb42de7db</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -519,10 +519,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>4</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>c906bafe-fb35-4a2b-afc8-9042badd8543</guid>
+    <guid>02cd7083-ace5-4031-97d5-cae12dcce7dc</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -597,10 +597,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>5</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>79b674a7-5dff-4846-a269-fe865e02e99f</guid>
+    <guid>25d4583a-4650-4fed-ae1c-70c3b4ce0b3c</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -675,10 +675,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>6</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>666f9ac0-7606-4e39-9f41-4f5867ca67ba</guid>
+    <guid>cde41965-d723-4c15-9685-278467cd3005</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -753,10 +753,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>7</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>1d7dfc1a-bc69-464c-92dd-388fa3e49de9</guid>
+    <guid>25817430-8f00-4837-a239-d1a2b79f1b17</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -831,10 +831,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>8</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>b8a4cee0-c813-4d9a-a488-de57bf2848b5</guid>
+    <guid>67bdbfd2-3a16-44ed-bad9-aff06c825318</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
@@ -909,10 +909,10 @@
     </property>
   </object>
   <object>
-    <name>PropertiesDisplayer.Code.Macro</name>
+    <name>Macros.PropertiesDisplayerMacro</name>
     <number>9</number>
     <className>XWiki.WikiMacroParameterClass</className>
-    <guid>4e9feed3-3905-4cfe-8744-9daa46a509bc</guid>
+    <guid>50484b25-87d5-48b5-a73f-d32b67885ed0</guid>
     <class>
       <name>XWiki.WikiMacroParameterClass</name>
       <customClass/>
