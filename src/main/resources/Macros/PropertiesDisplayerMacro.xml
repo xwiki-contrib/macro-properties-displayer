@@ -31,7 +31,7 @@
   <author>xwiki:XWiki.Admin</author>
   <contentAuthor>xwiki:XWiki.Admin</contentAuthor>
   <version>1.1</version>
-  <title>Macro</title>
+  <title>Properties Displayer Macro</title>
   <comment/>
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
@@ -210,19 +210,21 @@
   #set ($wikimacro = {})
   #set ($wikimacro.parameters = $xcontext.macro.params)
   ## Ensure that $propertiesList is converted to a list, since the parameters are strings.
-  #set ($propertiesList = $wikimacro.parameters.propertiesList.split(", "))
+  #set ($propertiesList = $wikimacro.parameters.properties.split(", "))
 #else
-  #set ($propertiesList = $wikimacro.parameters.propertiesList)
+  #set ($propertiesList = $wikimacro.parameters.properties)
 #end
 ##
-#set ($object = $wikimacro.parameters.object)
+#set ($object = $wikimacro.parameters.className)
 #set ($displayEmptyValues = $wikimacro.parameters.displayEmptyValues)
-#set ($blockNoColumns = $wikimacro.parameters.blockNoColumns)
-#set ($propertyNameNoColumns = $wikimacro.parameters.propertyNameClasses)
-#set ($propertyValuesNoColumns = $wikimacro.parameters.propertyValuesClasses)
-#set ($blockStyle = $wikimacro.parameters.blockStyle)
-#set ($blockTitle = $wikimacro.parameters.blockTitle)
-#set ($blockBgColor = $wikimacro.parameters.blockBackgroundColor)
+#set ($blockClasses = $wikimacro.parameters.blockClasses)
+#set ($propertyNameClasses = $wikimacro.parameters.propertyNameClasses)
+#set ($propertyValuesClasses = $wikimacro.parameters.propertyValuesClasses)
+#set ($blockStyle = $wikimacro.parameters.style)
+#set ($blockBgColor = $wikimacro.parameters.backgroundColor)
+#set ($title = $wikimacro.parameters.title)
+#set ($titleStyle = $wikimacro.parameters.titleStyle)
+#set ($titleClasses = $wikimacro.parameters.titleClasses)
 #if ('' != "$!blockBgColor")
   #if ('' == "$!blockStyle")
     #set ($blockStyle = '')
@@ -236,18 +238,20 @@
     {{html wiki="true"}}
 
     ## Block size
-    (% class="$blockNoColumns" style="$blockStyle" %)
+    (% class="$blockClasses" style="$blockStyle" %)
     (((
-    #if ('' != "$!blockTitle")
-      ((($blockTitle)))
-    #end
+    (% class=row %)
+    (((
+    (% class="$titleClasses" style="$!titleStyle" %)
+      ((($!title)))
+    )))
     #foreach($prop in $propertiesList)
       ## By default, display empty properties.
       #if ('true' == $displayEmptyValues || ('false' == $displayEmptyValues &amp;&amp; '' != $doc.display($prop)))
         (% class=row %)
         (((
-        (% class="$propertyNameNoColumns" %)((( $doc.displayPrettyName($prop) )))
-        (% class="$propertyValuesNoColumns" %)((( $doc.display($prop) )))
+        (% class="$propertyNameClasses" %)((( $doc.displayPrettyName($prop) )))
+        (% class="$propertyValuesClasses" %)((( $doc.display($prop) )))
         )))
       #end
     #end
@@ -356,7 +360,7 @@
       <mandatory>1</mandatory>
     </property>
     <property>
-      <name>object</name>
+      <name>className</name>
     </property>
     <property>
       <type/>
@@ -425,16 +429,16 @@
       </type>
     </class>
     <property>
-      <defaultValue>null</defaultValue>
+      <defaultValue/>
     </property>
     <property>
       <description>A list of ordered properties to be displayed for the object</description>
     </property>
     <property>
-      <mandatory>1</mandatory>
+      <mandatory>0</mandatory>
     </property>
     <property>
-      <name>propertiesList</name>
+      <name>properties</name>
     </property>
     <property>
       <type>java.util.List&lt;java.lang.String&gt;</type>
@@ -746,7 +750,7 @@
       <mandatory>0</mandatory>
     </property>
     <property>
-      <name>blockNoColumns</name>
+      <name>blockClasses</name>
     </property>
     <property>
       <type>java.lang.String</type>
@@ -824,7 +828,7 @@
       <mandatory>0</mandatory>
     </property>
     <property>
-      <name>blockStyle</name>
+      <name>style</name>
     </property>
     <property>
       <type>java.lang.String</type>
@@ -902,7 +906,7 @@
       <mandatory>0</mandatory>
     </property>
     <property>
-      <name>blockTitle</name>
+      <name>title</name>
     </property>
     <property>
       <type>java.lang.String</type>
@@ -971,6 +975,162 @@
       </type>
     </class>
     <property>
+      <defaultValue>#d9edf7</defaultValue>
+    </property>
+    <property>
+      <description/>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>backgroundColor</name>
+    </property>
+    <property>
+      <type>java.lang.String</type>
+    </property>
+  </object>
+  <object>
+    <name>Macros.PropertiesDisplayerMacro</name>
+    <number>10</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>46db3ff5-2115-43db-a5ad-5a62562bec46</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <type>
+        <disabled>0</disabled>
+        <name>type</name>
+        <number>5</number>
+        <prettyName>Parameter type</prettyName>
+        <size>60</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </type>
+    </class>
+    <property>
+      <defaultValue>col-sm-12</defaultValue>
+    </property>
+    <property>
+      <description/>
+    </property>
+    <property>
+      <mandatory>0</mandatory>
+    </property>
+    <property>
+      <name>titleClasses</name>
+    </property>
+    <property>
+      <type>java.lang.String</type>
+    </property>
+  </object>
+  <object>
+    <name>Macros.PropertiesDisplayerMacro</name>
+    <number>11</number>
+    <className>XWiki.WikiMacroParameterClass</className>
+    <guid>af9bc4c9-f9ad-47c6-ae4a-d780f27a0fcc</guid>
+    <class>
+      <name>XWiki.WikiMacroParameterClass</name>
+      <customClass/>
+      <customMapping/>
+      <defaultViewSheet/>
+      <defaultEditSheet/>
+      <defaultWeb/>
+      <nameField/>
+      <validationScript/>
+      <defaultValue>
+        <disabled>0</disabled>
+        <name>defaultValue</name>
+        <number>4</number>
+        <prettyName>Parameter default value</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </defaultValue>
+      <description>
+        <disabled>0</disabled>
+        <name>description</name>
+        <number>2</number>
+        <prettyName>Parameter description</prettyName>
+        <rows>5</rows>
+        <size>40</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.TextAreaClass</classType>
+      </description>
+      <mandatory>
+        <disabled>0</disabled>
+        <displayFormType>select</displayFormType>
+        <displayType>yesno</displayType>
+        <name>mandatory</name>
+        <number>3</number>
+        <prettyName>Parameter mandatory</prettyName>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.BooleanClass</classType>
+      </mandatory>
+      <name>
+        <disabled>0</disabled>
+        <name>name</name>
+        <number>1</number>
+        <prettyName>Parameter name</prettyName>
+        <size>30</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </name>
+      <type>
+        <disabled>0</disabled>
+        <name>type</name>
+        <number>5</number>
+        <prettyName>Parameter type</prettyName>
+        <size>60</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.StringClass</classType>
+      </type>
+    </class>
+    <property>
       <defaultValue/>
     </property>
     <property>
@@ -980,7 +1140,7 @@
       <mandatory>0</mandatory>
     </property>
     <property>
-      <name>blockBackgroundColor</name>
+      <name>titleStyle</name>
     </property>
     <property>
       <type>java.lang.String</type>
