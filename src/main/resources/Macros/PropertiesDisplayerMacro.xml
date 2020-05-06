@@ -206,16 +206,24 @@
     <property>
       <code>{{velocity wiki="true"}}
 ## wikimacro.parameters is available from XWiki 10.11.9, 11.3.2 and 11.6RC1
-#if ('' == "$!wikimacro.parameters")
+#if ("$!wikimacro.parameters" == '')
   #set ($wikimacro = {})
   #set ($wikimacro.parameters = $xcontext.macro.params)
-  ## Ensure that $propertiesList is converted to a list, since the parameters are strings.
+  ## $propertiesList should be a list, since the parameters are strings.
   #set ($propertiesList = $wikimacro.parameters.properties.split(", "))
 #else
   #set ($propertiesList = $wikimacro.parameters.properties)
 #end
 ##
-#set ($object = $wikimacro.parameters.className)
+#set ($object = $doc.getObject($wikimacro.parameters.className))
+## $propertiesList is by default equal to all parameters
+#if ("$!propertiesList" == '')
+  #set ($propertiesList = $collectionstool.set)
+  #set ($objectProperties = $object.getProperties())
+  #foreach ($prop in $objectProperties)
+    #set ($discard = $propertiesList.add($prop.getName()))
+  #end
+#end
 #set ($displayEmptyValues = $wikimacro.parameters.displayEmptyValues)
 #set ($blockClasses = $wikimacro.parameters.blockClasses)
 #set ($propertyNameClasses = $wikimacro.parameters.propertyNameClasses)
@@ -225,15 +233,16 @@
 #set ($title = $wikimacro.parameters.title)
 #set ($titleStyle = $wikimacro.parameters.titleStyle)
 #set ($titleClasses = $wikimacro.parameters.titleClasses)
-#if ('' != "$!blockBgColor")
-  #if ('' == "$!blockStyle")
+#if ("$!blockBgColor" != '')
+  #if ("$!blockStyle" == '')
     #set ($blockStyle = '')
   #end
     #set($blockStyle = $blockStyle + " background: $blockBgColor;")
 #end
-#if ('' != "$!object")
+##
+#if ("$!object" != '')
   #set ($discard = $doc.use($object))
-  #if ('' != "$!propertiesList")
+  #if ("$!propertiesList" != '')
 
     {{html wiki="true"}}
 
@@ -247,7 +256,7 @@
     )))
     #foreach($prop in $propertiesList)
       ## By default, display empty properties.
-      #if ('true' == $displayEmptyValues || ('false' == $displayEmptyValues &amp;&amp; '' != $doc.display($prop)))
+      #if ($displayEmptyValues == 'true' || ($displayEmptyValues == 'false' &amp;&amp; $doc.display($prop) != ''))
         (% class=row %)
         (((
         (% class="$propertyNameClasses" %)((( $doc.displayPrettyName($prop) )))
@@ -588,7 +597,7 @@
       <defaultValue>col-sm-6</defaultValue>
     </property>
     <property>
-      <description>Bootstrap columns for the name of the properties</description>
+      <description>Classes for the name of a property</description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -666,7 +675,7 @@
       <defaultValue>col-sm-6</defaultValue>
     </property>
     <property>
-      <description>Bootstrap columns for the value of a property</description>
+      <description>Classes for the value of a property</description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -822,7 +831,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description>CSS for the block. Note that the background color and the number of Bootstrap columns are anothers parameters.</description>
+      <description>CSS for the block. Note that the background color is another parameter.</description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -900,7 +909,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description/>
+      <description>The title of the block</description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -978,7 +987,7 @@
       <defaultValue>#d9edf7</defaultValue>
     </property>
     <property>
-      <description/>
+      <description>Background color of the block</description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -1056,7 +1065,7 @@
       <defaultValue>col-sm-12</defaultValue>
     </property>
     <property>
-      <description/>
+      <description>Classes for the title of the block</description>
     </property>
     <property>
       <mandatory>0</mandatory>
@@ -1134,7 +1143,7 @@
       <defaultValue/>
     </property>
     <property>
-      <description/>
+      <description>CSS for the title of the block</description>
     </property>
     <property>
       <mandatory>0</mandatory>
