@@ -49,7 +49,7 @@
     <xwiki.extension.category>macro</xwiki.extension.category>
 
     <!-- Issue management -->
-    <xwiki.release.jira.skip>true</xwiki.release.jira.skip>
+    <xwiki.release.jira.skip>false</xwiki.release.jira.skip>
     <xwiki.issueManagement.jira.id>XMPD</xwiki.issueManagement.jira.id>
   </properties>
 </project>
