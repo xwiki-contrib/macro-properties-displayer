@@ -36,7 +36,38 @@
   <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content/>
+  <content>This macro displays a block with properties name and corresponding values from an object. As an example, it can be used in class sheets.
+
+== Usage ==
+
+{{code}}
+ {{propertiesDisplayer className="my-class" /}}
+{{/code}}
+
+Where {{code}}my-class{{/code}} is the name of the class for which you want to display the properties.
+
+== Parameters ==
+
+{{velocity}}
+  #set ($parameters = $doc.getObjects('XWiki.WikiMacroParameterClass'))
+  #set ($tableHeaders = '|=Name|=Description|=Mandatory|=Default')
+  #set ($tableBody = '')
+  #foreach ($parameter in $parameters)
+    #set ($isMandatory = ${parameter.getProperty('mandatory').value})
+    #if ($isMandatory == "true")
+      #set ($isMandatory = "Yes")
+    #else
+      #set ($isMandatory = "No")
+     #end
+    #set ($tableBody = "$tableBody|${parameter.getProperty('name').value}|(((${parameter.getProperty('description').value})))|$isMandatory|$parameter.getProperty('defaultValue').value
+    ")
+  #end
+  #if ($request.debug)
+    {{code}} $tableHeaders $tableBody {{/code}}
+  #end
+##
+  $tableHeaders $tableBody
+{{/velocity}}</content>
   <object>
     <name>Macros.PropertiesDisplayerMacro</name>
     <number>0</number>
