@@ -63,10 +63,14 @@ Where {{code}}my-class{{/code}} is the name of the class for which you want to d
     ")
   #end
   #if ($request.debug)
-    {{code}} $tableHeaders $tableBody {{/code}}
+    {{code}}
+      $tableHeaders
+      $tableBody
+    {{/code}}
   #end
 ##
-  $tableHeaders $tableBody
+  $tableHeaders
+  $tableBody
 {{/velocity}}</content>
   <object>
     <name>Macros.PropertiesDisplayerMacro</name>
