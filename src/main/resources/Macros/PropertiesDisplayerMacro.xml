@@ -250,7 +250,8 @@ Where {{code}}my-class{{/code}} is the name of the class for which you want to d
   #set ($propertiesList = $wikimacro.parameters.properties)
 #end
 ##
-#set ($object = $doc.getObject($wikimacro.parameters.className))
+#set ($className = $wikimacro.parameters.className)
+#set ($object = $doc.getObject($!className))
 ## $propertiesList is by default equal to all parameters
 #if ("$!propertiesList" == '')
   #set ($propertiesList = $collectionstool.set)
@@ -281,6 +282,8 @@ Where {{code}}my-class{{/code}} is the name of the class for which you want to d
 
     {{html wiki="true"}}
 
+    ## in-place edit
+    #set ($editing = $xcontext.action == 'edit')
     ## Block size
     (% class="$blockClasses" style="$blockStyle" %)
     (((
@@ -289,16 +292,25 @@ Where {{code}}my-class{{/code}} is the name of the class for which you want to d
     (% class="$titleClasses" style="$!titleStyle" %)
       ((($!title)))
     )))
-    #foreach($prop in $propertiesList)
-      ## By default, display empty properties.
-      #if ($displayEmptyValues == 'true' || ($displayEmptyValues == 'false' &amp;&amp; $doc.display($prop) != ''))
+    &lt;div class="xform"&gt;&lt;dl&gt;
+      #foreach($prop in $propertiesList)
+        ## By default, display empty properties.
+        #if ($displayEmptyValues == 'true' || ($displayEmptyValues == 'false' &amp;&amp; $doc.display($prop) != ''))
         (% class=row %)
         (((
-        (% class="$propertyNameClasses" %)((( $doc.displayPrettyName($prop) )))
-        (% class="$propertyValuesClasses" %)((( $doc.display($prop) )))
+          &lt;dt #if (!$editing &amp;&amp; $hasEdit)
+              class="editableProperty $!propertyNameClasses"
+              data-property="$escapetool.xml($services.model.serialize($object.getProperty($prop).reference))"
+              data-property-type="object"#end&gt;
+            &lt;label#if ($editing) for="$className"#end&gt;
+              $escapetool.xml($doc.displayPrettyName($prop, false, false))
+            &lt;/label&gt;
+          &lt;/dt&gt;
+          &lt;dd class="$propertyValuesClasses"&gt;$doc.display($prop)&lt;/dd&gt;
         )))
+        #end
       #end
-    #end
+    &lt;/dl&gt;&lt;/div&gt;
     )))
 
     {{/html}}
