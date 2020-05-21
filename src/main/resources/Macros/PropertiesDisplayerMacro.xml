@@ -877,7 +877,7 @@ Where {{code}}my-class{{/code}} is the name of the class for which you want to d
       </type>
     </class>
     <property>
-      <defaultValue/>
+      <defaultValue>border-radius: 10px; padding: 5px; line-height: 25px; padding-bottom: 20px;</defaultValue>
     </property>
     <property>
       <description>CSS for the block. Note that the background color is another parameter.</description>
@@ -1033,7 +1033,7 @@ Where {{code}}my-class{{/code}} is the name of the class for which you want to d
       </type>
     </class>
     <property>
-      <defaultValue>#d9edf7</defaultValue>
+      <defaultValue>#f5f5f5</defaultValue>
     </property>
     <property>
       <description>Background color of the block</description>
@@ -1189,7 +1189,7 @@ Where {{code}}my-class{{/code}} is the name of the class for which you want to d
       </type>
     </class>
     <property>
-      <defaultValue/>
+      <defaultValue>font-weight:bold;</defaultValue>
     </property>
     <property>
       <description>CSS for the title of the block</description>
