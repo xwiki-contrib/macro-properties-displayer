@@ -52,5 +52,10 @@
     <!-- Issue management -->
     <xwiki.release.jira.skip>false</xwiki.release.jira.skip>
     <xwiki.issueManagement.jira.id>XMPD</xwiki.issueManagement.jira.id>
+
+    <!-- Components -->
+    <xwiki.extension.components>
+      org.xwiki.rendering.macro.Macro/propertiesDisplayer
+    </xwiki.extension.components>
   </properties>
 </project>
